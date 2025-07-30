@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "name": "API Access",
+    "prices": {
+      "usd": "99",
+      "inr": "2499",
+      "eur": "89",
+      "gbp": "80"
+    },
+    "billingCycle": "/mo",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 2,
+    "name": "Custom Training",
+    "prices": {
+      "usd": "999",
+      "inr": "25999",
+      "eur": "899",
+      "gbp": "819"
+    },
+    "billingCycle": "/mo",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 3,
+    "name": "1:1 Strategy Call (60 min)",
+    "prices": {
+      "usd": "42",
+      "inr": "3599",
+      "eur": "39",
+      "gbp": "36"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 4,
+    "name": "Logo & Brand Kit",
+    "prices": {
+      "usd": "92",
+      "inr": "7899",
+      "eur": "86",
+      "gbp": "80"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 5,
+    "name": "Social Media Pack (15 posts)",
+    "prices": {
+      "usd": "46",
+      "inr": "3999",
+      "eur": "42",
+      "gbp": "39"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 6,
+    "name": "Business Pitch Deck",
+    "prices": {
+      "usd": "135",
+      "inr": "11599",
+      "eur": "125",
+      "gbp": "116"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 7,
+    "name": "Lifetime Resource Bundle",
+    "prices": {
+      "usd": "69",
+      "inr": "5999",
+      "eur": "64",
+      "gbp": "59"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": false
+  },
+  {
+    "id": 8,
+    "name": "Enterprise SLA",
+    "prices": {
+      "usd": "Custom",
+      "inr": "Custom",
+      "eur": "Custom",
+      "gbp": "Custom"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": true
+  },
+  {
+    "id": 9,
+    "name": "Managed Services",
+    "prices": {
+      "usd": "Custom",
+      "inr": "Custom",
+      "eur": "Custom",
+      "gbp": "Custom"
+    },
+    "billingCycle": "",
+    "link": "#",
+    "customContact": true
+  }
+]

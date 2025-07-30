@@ -1,0 +1,475 @@
+/* ========= VARIABLES AND BASE ========= */
+:root {
+  --purple: #7357f6;
+  --black: #0a0a0a;
+  --dark: #111;
+  --white: #ffffff8a;
+  --gray: #aaa;
+  --light: #f5f5f5;
+  --green: #00cc66;
+  --red: #ff2c2c;
+  --red-dark: #e60000;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: #fff;
+  background: var(--dark);
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+::selection {
+  background: var(--purple);
+  color: #fff;
+}
+
+
+/* ========= RESOURCES INTRO ========= */
+.resourcesIntro {
+  background: var(--dark);
+  padding: 5rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.resourcesIntro h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  background: linear-gradient(to bottom, #fff, #6a6a6a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.resourcesIntro p {
+  font-size: 1.4rem;
+  color: var(--gray);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+/* ========= RESOURCES TABS ========= */
+.resourcesTabs {
+  background: var(--dark);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 90px; /* Adjust based on your header height */
+  z-index: 998;
+}
+.resourcesTabs ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  justify-content: center;
+}
+.resourcesTabs li {
+  flex: 1;
+  min-width: fit-content;
+  text-align: center;
+}
+.resourcesTabs a {
+  display: block;
+  padding: 1rem 2rem;
+  color: var(--gray);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border-top: 3px solid transparent;
+  transition: all 0.2s;
+}
+.resourcesTabs a.active,
+.resourcesTabs a:hover,
+.resourcesTabs a:focus {
+  color: #fff;
+  background: rgba(115, 87, 246, 0.1);
+  border-top-color: var(--purple);
+}
+
+/* ===== RESOURCES STORE SECTION ==== */
+.paidResourcesSection {
+  background: var(--dark);
+  padding: 3rem 0 4rem;
+}
+.resourcesHeading {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.resourcesHeading h2 {
+  font-weight: 800;
+  font-size: 2.2rem;
+  background: linear-gradient(to right, #fff, var(--gray));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.resourcesHeading p {
+  color: var(--gray);
+  margin-bottom: 0;
+}
+.resourcesCategories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 0 auto 2rem auto;
+  max-width: 800px;
+  list-style: none;
+  padding: 0;
+}
+.resourcesCategories li a {
+  color: var(--gray);
+  padding: 0.5rem 1.2rem;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.08);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+.resourcesCategories li a:hover,
+.resourcesCategories li a:focus {
+  color: #fff;
+  background: rgba(115, 87, 246, 0.15);
+  border-color: var(--purple);
+}
+.resourcesCategories li a.active {
+  color: #fff;
+  background: rgba(115, 87, 246, 0.25);
+  border-color: var(--purple);
+}
+.resourceList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.resourceCard {
+  background: #161616;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 16px #0004;
+  transition: transform 0.17s, box-shadow 0.17s, border-color 0.17s;
+  border: 1px solid rgba(115, 87, 246, 0.15);
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.resourceCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  border-color: var(--purple);
+}
+.resourceCard img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.resourceTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+}
+.resourcePrice {
+  font-size: 1.3rem;
+  color: var(--green);
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+.resourceDescription {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+.resourceActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.addCartBtn, .downloadBtn {
+  padding: 0.9rem 1.8rem;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+.addCartBtn {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+}
+.addCartBtn:hover, .addCartBtn:focus {
+  background: transparent;
+  color: var(--purple);
+  box-shadow: 0 2px 8px #7357f629;
+}
+.downloadBtn {
+  background: transparent;
+  color: var(--green);
+  border-color: var(--green);
+}
+.downloadBtn:hover, .downloadBtn:focus {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 204, 102, 0.2);
+}
+.categoryTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 3rem 0 1.5rem 0;
+  padding-left: 0.5rem;
+  border-left: 4px solid var(--purple);
+  grid-column: 1 / -1;
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+
+/* Large desktops and up (1201px and above) */
+@media (min-width: 1201px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Desktops and small laptops (992px to 1200px) */
+@media (max-width: 1200px) and (min-width: 992px) {
+  .container {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+  .resourcesIntro h1 {
+    font-size: 2.5rem;
+  }
+  .resourcesIntro p {
+    font-size: 1.2rem;
+    max-width: 700px;
+  }
+  .resourcesTabs a {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .resourceCard {
+    padding: 1.8rem 1.2rem;
+  }
+  .resourceTitle {
+    font-size: 1.2rem;
+  }
+  .resourcePrice {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablets (768px to 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  .container {
+    max-width: 90%;
+    padding: 0 1rem;
+  }
+  .resourcesIntro h1 {
+    font-size: 2.2rem;
+  }
+  .resourcesIntro p {
+    font-size: 1.1rem;
+    max-width: 90%;
+  }
+  .resourcesTabs ul {
+    justify-content: flex-start;
+  }
+  .resourcesTabs li {
+    flex: none;
+    min-width: auto;
+    margin-right: 1rem;
+  }
+  .resourcesTabs a {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  .resourceList {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .resourceCard {
+    padding: 1.6rem 1.2rem;
+  }
+  .resourceTitle {
+    font-size: 1.15rem;
+  }
+  .resourcePrice {
+    font-size: 1.15rem;
+  }
+  .resourceDescription {
+    font-size: 0.9rem;
+  }
+}
+
+/* Large mobiles and small tablets (481px to 767px) */
+@media (max-width: 767px) and (min-width: 481px) {
+  html {
+    font-size: 14.5px;
+  }
+  .container {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+  .resourcesIntro h1 {
+    font-size: 1.9rem;
+  }
+  .resourcesIntro p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  .resourcesTabs ul {
+    justify-content: flex-start;
+    padding: 0 0.5rem;
+  }
+  .resourcesTabs li {
+    flex: none;
+    min-width: auto;
+    margin-right: 0.8rem;
+  }
+  .resourcesTabs a {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+  }
+  .resourceList {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .resourceCard {
+    padding: 1.4rem 1rem;
+  }
+  .resourceTitle {
+    font-size: 1.1rem;
+  }
+  .resourcePrice {
+    font-size: 1.1rem;
+  }
+  .resourceDescription {
+    font-size: 0.9rem;
+  }
+  .addCartBtn, .downloadBtn {
+    font-size: 0.9rem;
+    min-width: 100px;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+/* Small devices / mobiles (up to 480px) */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  .container {
+    max-width: 100%;
+    padding: 0 1rem;
+    margin: 0 auto;
+  }
+  .resourcesIntro h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.7rem;
+  }
+  .resourcesIntro p {
+    font-size: 0.9rem;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+  .resourcesTabs ul {
+    justify-content: flex-start;
+    padding: 0 0.5rem;
+    overflow-x: auto;
+  }
+  .resourcesTabs li {
+    flex: none;
+    min-width: auto;
+    margin-right: 0.6rem;
+  }
+  .resourcesTabs a {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.8rem;
+  }
+  .resourceList {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .resourceCard {
+    padding: 1.2rem 1rem;
+  }
+  .resourceCard img {
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+  }
+  .resourceTitle {
+    font-size: 1rem;
+  }
+  .resourcePrice {
+    font-size: 1rem;
+  }
+  .resourceDescription {
+    font-size: 0.85rem;
+  }
+  .resourceActions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .addCartBtn, .downloadBtn {
+    font-size: 0.9rem;
+    min-width: 100%;
+    padding: 0.8rem 0;
+    text-align: center;
+  }
+  .categoryTitle {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+    padding-left: 0.3rem;
+    border-left-width: 3px;
+  }
+}
