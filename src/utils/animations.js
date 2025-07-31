@@ -21,20 +21,19 @@ export const slideInFromLeft = (element, duration = 500) => {
 // Automatically slides through story cards every 3 seconds
 
 export const autoSlideStories = () => {
-  const slides = document.querySelectorAll('.story-card');
+  const slides = document.querySelectorAll('.storyCard');
+  if (!slides.length) return; // Guard against empty NodeList
   let current = 0;
-
-  // Initial setup
   slides.forEach((slide, index) => {
     slide.style.display = index === 0 ? 'block' : 'none';
   });
-
   setInterval(() => {
     slides[current].style.display = 'none';
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
     slides[current].style.display = 'block';
     slides[current].classList.add('active');
-  }, 1000);
+  }, 3000);
 };
+
 
