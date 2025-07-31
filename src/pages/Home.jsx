@@ -109,17 +109,17 @@ const Home = () => {
         <div className={styles.servicesIcons}>
             <div className={styles.serviceItem}>
                 <span className={styles.serviceIcon}>🚀</span>
-                <a href="./Services.jsx"><h3>Ready-to-Launch Kits</h3></a>
+                <a href="./Services"><h3>Ready-to-Launch Kits</h3></a>
                 <p><small>Everything you need to start instantly—market research, branding, website, monetization, tools.</small></p>
             </div>
             <div className={styles.serviceItem}>
                 <span className={styles.serviceIcon}>📊</span>
-                <a href="./Services.jsx"><h3>Strategy Lab</h3></a>
+                <a href="./Services"><h3>Strategy Lab</h3></a>
                 <p><small>Custom audit, competitor analysis, growth roadmap, and automation for growth.</small></p>
             </div>
             <div className={styles.serviceItem}>
                 <span className={styles.serviceIcon}>🧠</span>
-                <a href="./Services.jsx"><h3>Pro Build</h3></a>
+                <a href="./Services"><h3>Pro Build</h3></a>
                 <p><small>End-to-end execution—website, branding, digital marketing, CRM, automation, ongoing support.</small></p>
             </div>
         </div>
