@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Home.module.css'; // or adjust to correct styles path
+import styles from './Home.module.css'; // Adjust the path if your CSS module file is elsewhere
 
 const stories = [
   {
@@ -20,12 +20,14 @@ export default function SuccessStories() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    // Auto-slide every 5 seconds
     const slideInterval = setInterval(() => {
       setActiveIndex((prevIndex) =>
         prevIndex === stories.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // 5 seconds per slide
+    }, 5000);
 
+    // Cleanup on unmount
     return () => clearInterval(slideInterval);
   }, []);
 
@@ -39,7 +41,7 @@ export default function SuccessStories() {
         {stories.map((story, index) => (
           <div
             key={index}
-            className={`${styles.storyCard} ${index === activeIndex ? styles.active : ''}`}
+            className={`storyCard ${styles.storyCard} ${index === activeIndex ? styles.active : ''}`}
           >
             <h3 className={styles.storyName}>{story.name}</h3>
             <p className={styles.storyText}>{story.text}</p>
