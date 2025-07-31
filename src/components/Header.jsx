@@ -8,11 +8,12 @@ const Header = () => {
   return (
     <header className="topbar">
       <div className="logo-area">
-        <img src={logo} alt="SideNest Logo" className="logo" />
+       
+       <NavLink to ="/"><img src={logo} alt="SideNest Logo" className="logo" /></NavLink>
       </div>
       <nav className="topnav">
         <ul>
-          <li><NavLink to="/home" end>Home</NavLink></li>
+          <li><NavLink to="/" end>Home</NavLink></li>
           <li><NavLink to="/services">Services</NavLink></li>
           <li><NavLink to="/resources" className={({ isActive }) => isActive ? 'active' : ''}>Resources</NavLink></li>
           <li><NavLink to="/pricing">Pricing</NavLink></li>
