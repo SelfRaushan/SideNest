@@ -309,6 +309,12 @@ form button[type="submit"]:focus {
   letter-spacing: .01em;
   margin-top: 0.02em;
 }
+.errorText {
+  color: #ff2c2c;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 600;
+}
 
 /* ========== SERVICES ========== */
 .servicesSection {
@@ -582,8 +588,6 @@ form button[type="submit"]:focus {
 
 
 
-
-
 /* ========== SUCCESS STORIES ========== */
 .successStories {
   background: #14141c;
@@ -595,6 +599,7 @@ form button[type="submit"]:focus {
   margin: 38px auto 0 auto;
   min-height: 172px;
 }
+
 .storyCard {
   display: none;
   background: #191933;

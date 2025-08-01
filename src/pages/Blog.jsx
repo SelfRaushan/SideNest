@@ -1,73 +1,71 @@
 import { useEffect } from "react";
 import styles from './Blog.module.css';
 
+// Example blog post data. Replace with your actual data!
+const posts = [
+  {
+    id: 1,
+    title: "Top Business Ideas to Start in 2025",
+    date: "July 29, 2025",
+    image: "/images/blog/business-ideas-2025.jpg",
+    excerpt:
+      "Discover the most promising business opportunities for the coming year—with actionable insights and real-world examples to help you jumpstart your journey.",
+    link: "#"
+  },
+  {
+    id: 2,
+    title: "How to Validate Your Business Idea Before Investing",
+    date: "July 26, 2025",
+    image: "/images/blog/validate-idea.jpg",
+    excerpt:
+      "Learn proven methods to test your business concept before launch, avoid costly mistakes, and build a product people actually want.",
+    link: "#"
+  },
+  {
+    id: 3,
+    title: "Marketing Tactics for Coaches & Content Creators",
+    date: "July 21, 2025",
+    image: "/images/blog/marketing-tactics.jpg",
+    excerpt:
+      "Get step-by-step marketing frameworks, tools, and strategies to grow your coaching or content business—fast and efficiently.",
+    link: "#"
+  },
+  {
+    id: 4,
+    title: "Real Success Stories: Entrepreneurs Who Made It",
+    date: "July 20, 2025",
+    image: "/images/blog/success-stories.jpg",
+    excerpt:
+      "Follow the journeys of SideNest clients who started from scratch and built profitable businesses. Learn from their wins, mistakes, and growth tactics.",
+    link: "#"
+  }
+];
+
 const Blog = () => {
   useEffect(() => {
     document.title = "Blog - SideNest";
   }, []);
 
   return (
-    <>
-      <div className={styles.container}>
-        <h2 className={styles["blog-title"]}>Featured Articles</h2>
-
-        <article className={styles.post} tabIndex={0}>
+    <div className={styles.container}>
+      <h1 className={styles["blog-title"]}>Business & Startup Blog</h1>
+      {posts.map((post) => (
+        <article className={styles.post} key={post.id}>
           <img
-            src="/img/blog/business-ideas-2025.jpg"
-            alt="Lightbulb representing business ideas"
+            src={post.image}
+            alt={post.title}
             className={styles["post-thumb"]}
+            loading="lazy"
           />
-          <h3 className={styles["post-title"]}>Top Business Ideas to Start in 2025</h3>
-          <time dateTime="2025-07-25" className={styles["post-date"]}>July 25, 2025</time>
-          <p className={styles["post-excerpt"]}>
-            Discover the most promising business opportunities for the coming year—with actionable insights and real-world examples to help you jumpstart your journey.
-          </p>
-          <a href="#" className={styles["read-more"]} aria-label="Read more about Top Business Ideas to Start in 2025">Read more</a>
+          <h2 className={styles["post-title"]}>{post.title}</h2>
+          <span className={styles["post-date"]}>{post.date}</span>
+          <p className={styles["post-excerpt"]}>{post.excerpt}</p>
+          <a href={post.link} className={styles["read-more"]} tabIndex={0}>
+            Read more
+          </a>
         </article>
-
-        <article className={styles.post} tabIndex={0}>
-          <img
-            src="/img/blog/validate-startup-idea.jpg"
-            alt="Person writing on a notebook"
-            className={styles["post-thumb"]}
-          />
-          <h3 className={styles["post-title"]}>How to Validate Your Startup Idea</h3>
-          <time dateTime="2025-07-18" className={styles["post-date"]}>July 18, 2025</time>
-          <p className={styles["post-excerpt"]}>
-            Learn proven methods to test your business concept before launch, avoid costly mistakes, and build a product people actually want.
-          </p>
-          <a href="#" className={styles["read-more"]} aria-label="Read more about How to Validate Your Startup Idea">Read more</a>
-        </article>
-
-        <article className={styles.post} tabIndex={0}>
-          <img
-            src="/img/blog/marketing-blueprints.jpg"
-            alt="Marketing plan on a whiteboard"
-            className={styles["post-thumb"]}
-          />
-          <h3 className={styles["post-title"]}>Marketing Blueprints for Coaches & Creators</h3>
-          <time dateTime="2025-07-11" className={styles["post-date"]}>July 11, 2025</time>
-          <p className={styles["post-excerpt"]}>
-            Get step-by-step marketing frameworks, tools, and strategies to grow your coaching or content business—fast and efficiently.
-          </p>
-          <a href="#" className={styles["read-more"]} aria-label="Read more about Marketing Blueprints for Coaches & Creators">Read more</a>
-        </article>
-
-        <article className={styles.post} tabIndex={0}>
-          <img
-            src="/img/blog/case-studies.jpg"
-            alt="Success story illustration"
-            className={styles["post-thumb"]}
-          />
-          <h3 className={styles["post-title"]}>Zero to ₹1L/Month—Real Case Studies</h3>
-          <time dateTime="2025-07-04" className={styles["post-date"]}>July 4, 2025</time>
-          <p className={styles["post-excerpt"]}>
-            Follow the journeys of SideNest clients who started from scratch and built profitable businesses. Learn from their wins, mistakes, and growth tactics.
-          </p>
-          <a href="#" className={styles["read-more"]} aria-label="Read more about Zero to ₹1L/Month—Real Case Studies">Read more</a>
-        </article>
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 

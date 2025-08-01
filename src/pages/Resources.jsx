@@ -11,7 +11,7 @@ const Resources = () => {
 
     async function fetchProducts() {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://sidenest.onrender.com/api';
         const res = await fetch(`${apiUrl}/products`);
         if (!res.ok) throw new Error('Failed to fetch products');
         const data = await res.json();

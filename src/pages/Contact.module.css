@@ -340,6 +340,12 @@ a {
   transform: translateY(-2px);
   box-shadow: 0 4px 22px #7357f659;
 }
+.errorText {
+  color: #ff2c2c;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 600;
+}
 
 /* ====== Map Section ====== */
 

@@ -1,10 +1,113 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from './Contact.module.css';
 
 const Contact = () => {
   useEffect(() => {
     document.title = "Contact - SideNest";
   }, []);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+
+  // Validation errors
+  const [formErrors, setFormErrors] = useState({});
+
+  // Form submission status
+  const [formStatus, setFormStatus] = useState(null);
+
+  // Validate individual fields
+  const validateField = (name, value) => {
+    switch(name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required';
+        return '';
+      case 'email':
+        if (!value.trim()) return 'Email is required';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return 'Enter a valid email';
+        return '';
+      case 'phone':
+        if (value.trim()) {
+          const phoneRegex = /^[0-9+\-\s]*$/;
+          if (!phoneRegex.test(value)) return 'Enter a valid phone number';
+        }
+        return '';
+      case 'subject':
+        // Subject not required in your current form, but you can toggle this
+        // if (!value.trim()) return 'Subject is required';
+        return '';
+      case 'message':
+        if (!value.trim()) return 'Message is required';
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  // Validate entire form
+  const validateForm = () => {
+    const errors = {};
+    Object.entries(formData).forEach(([key, value]) => {
+      const error = validateField(key, value);
+      if (error) errors[key] = error;
+    });
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Handle input value changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Validate field on change
+    const error = validateField(name, value);
+    setFormErrors(prev => ({
+      ...prev,
+      [name]: error,
+    }));
+  };
+
+  // Submit form handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus(null);
+
+    if (!validateForm()) {
+      setFormStatus({ success: false, message: 'Please fix the errors in the form.' });
+      return;
+    }
+
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+      const response = await fetch(`${apiUrl}/form`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.message || 'Failed to submit form');
+
+      setFormStatus({ success: true, message: data.message });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormErrors({});
+    } catch (error) {
+      setFormStatus({ success: false, message: error.message });
+    }
+  };
 
   return (
     <>
@@ -67,28 +170,90 @@ const Contact = () => {
 
         {/* RIGHT: Contact Form */}
         <section className={styles["contact-form-col"]}>
-          <form className={styles["contact-form"]} action="#" method="POST" autoComplete="off">
+          <form onSubmit={handleSubmit} className={styles["contact-form"]} autoComplete="off" noValidate>
             <div>
               <label htmlFor="name">Full Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required />
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                aria-describedby="nameError"
+                aria-invalid={!!formErrors.name}
+              />
+              {formErrors.name && <div id="nameError" className={styles.errorText} role="alert">{formErrors.name}</div>}
             </div>
             <div>
               <label htmlFor="email">Email Address</label>
-              <input id="email" name="email" type="email" placeholder="you@email.com" required />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@email.com"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                aria-describedby="emailError"
+                aria-invalid={!!formErrors.email}
+              />
+              {formErrors.email && <div id="emailError" className={styles.errorText} role="alert">{formErrors.email}</div>}
             </div>
             <div>
               <label htmlFor="phone">Phone Number</label>
-              <input id="phone" name="phone" type="tel" placeholder="e.g., +1 234 567 8901" />
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="e.g., +1 234 567 8901"
+                value={formData.phone}
+                onChange={handleChange}
+                aria-describedby="phoneError"
+                aria-invalid={!!formErrors.phone}
+              />
+              {formErrors.phone && <div id="phoneError" className={styles.errorText} role="alert">{formErrors.phone}</div>}
             </div>
             <div>
               <label htmlFor="subject">Subject</label>
-              <input id="subject" name="subject" type="text" placeholder="Tell us how we can help" />
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                placeholder="Tell us how we can help"
+                value={formData.subject}
+                onChange={handleChange}
+                aria-describedby="subjectError"
+                aria-invalid={!!formErrors.subject}
+              />
+              {formErrors.subject && <div id="subjectError" className={styles.errorText} role="alert">{formErrors.subject}</div>}
             </div>
             <div>
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Type your message here..."
+                required
+                rows="4"
+                value={formData.message}
+                onChange={handleChange}
+                aria-describedby="messageError"
+                aria-invalid={!!formErrors.message}
+              ></textarea>
+              {formErrors.message && <div id="messageError" className={styles.errorText} role="alert">{formErrors.message}</div>}
             </div>
             <button type="submit">Send Request</button>
+            {formStatus && (
+              <div
+                className={styles.formSuccess}
+                style={{ color: formStatus.success ? "green" : "red", marginTop: '10px' }}
+                role="alert"
+              >
+                {formStatus.message}
+              </div>
+            )}
           </form>
         </section>
       </div>
