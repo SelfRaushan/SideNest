@@ -1,11 +1,12 @@
 /* ========= VARIABLES AND BASE ========= */
+
 :root {
   --purple: #7357f6;
   --black: #0a0a0a;
   --dark: #111;
-  --white: #ffffff8a;
+  --white: #ffffffda;
   --gray: #aaa;
-  --gray-light: #ccc; /* added for input color */
+  --gray-light: #ccc;
   --light: #f5f5f5;
   --green: #00cc66;
   --red: #ff2c2c;
@@ -13,7 +14,6 @@
   --transition: 0.3s ease;
   --font-sub: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 *,
 *::before,
@@ -34,6 +34,7 @@ body {
   background: var(--dark);
 }
 
+/* Universal styles */
 img {
   max-width: 100%;
   display: block;
@@ -57,22 +58,26 @@ a {
   color: #fff;
 }
 
-/* ========= HEADER ========= */
+/* ========= HEADER/NAVBAR ========= */
+
+.NavbarItems,
 .topbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: var(--dark);
+  justify-content: space-between;
   padding: 1em 2em;
+  background: var(--dark);
   border-radius: 0 0 18px 18px;
   margin-bottom: 2em;
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 1000;
   flex-wrap: wrap;
 }
 
-.logo-area {
+/* Logo & Brand Area */
+.logo-area,
+.NavbarItems .logo-area {
   display: flex;
   align-items: center;
   gap: 0.8em;
@@ -82,22 +87,21 @@ a {
   display: inline-block;
   transition: transform 0.18s, box-shadow 0.18s;
 }
-
 .logo-area a:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px #7357f649;
 }
 
 .logo {
-  width: 100%;
-  height: 100%;
+  height: 42px;
   border-radius: 8px;
   object-fit: contain;
   box-shadow: 0 2px 8px #2223;
-  max-width: 200px;
+  max-width: 120px;
 }
 
-.brand {
+.brand,
+.NavbarItems .brand {
   font-size: 2em;
   font-weight: bold;
   letter-spacing: 1.2px;
@@ -105,16 +109,33 @@ a {
   white-space: nowrap;
 }
 
+/* Hamburger/Cross Icons */
+.Hamburger-Cross-Icons,
+.hamburger {
+  display: none;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 1200;
+}
+
+/* Main Navigation Styles */
+.MenuItems, /* Used in NavItems-driven header */
 .topnav ul {
   display: flex;
   gap: 1.2em;
   align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
   flex-wrap: wrap;
 }
 
+.MenuItems li,
+.topnav ul li {
+  position: relative;
+}
+
+.MenuItems li a,
 .topnav ul li a {
   color: var(--white);
   font-weight: 600;
@@ -122,36 +143,40 @@ a {
   border-radius: 20px;
   transition: background 0.18s, color 0.18s;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
 
+.MenuItems li a:hover,
 .topnav ul li a:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.14);
 }
 
+.MenuItems li a.active,
 .topnav ul li a.active {
   background: var(--purple);
   color: #fff;
   box-shadow: 0 2px 8px #7357f629;
 }
 
-.topnav ul li a.cta-main,
+.MenuItems li .nav-button,
 .topnav ul li .cta-main {
+  background: #fff;
   color: var(--purple);
-  background: #1c1010ed;
   font-weight: 700;
   border-radius: 22px;
   box-shadow: 0 2px 8px #7357f629;
-  transition: background 0.18s, color 0.18s, box-shadow 0.22s;
   padding: 9px 26px;
   outline: none;
   border: none;
   display: inline-block;
-  position: relative;
+  transition: background 0.18s, color 0.18s, box-shadow 0.22s;
 }
 
-.topnav ul li a.cta-main:hover,
+.MenuItems li .nav-button:hover,
 .topnav ul li .cta-main:hover,
-.topnav ul li a.cta-main:focus,
+.MenuItems li .nav-button:focus,
 .topnav ul li .cta-main:focus {
   background: var(--purple);
   color: #fff;
@@ -159,26 +184,116 @@ a {
   text-decoration: none;
 }
 
-.cta-main {
-  background: var(--purple);
-  color: #fff;
-  padding: 9px 26px;
-  border-radius: 22px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: background 0.18s, color 0.18s, box-shadow 0.22s;
-  box-shadow: 0 2px 8px #7357f629;
+/* ================= MOBILE NAV STYLES ================ */
+@media (max-width: 900px) {
+  .Hamburger-Cross-Icons,
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 2em;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* NavItems pattern */
+  .MenuItems {
+    flex-direction: column;
+    background: #181818;
+    position: fixed;
+    left: 0;
+    top: 69px;
+    width: 100vw;
+    height: calc(100vh - 69px);
+    align-items: flex-start;
+    padding: 2em 2em 2em 2em;
+    gap: 2em;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s, opacity 0.25s;
+    z-index: 1150;
+    border-radius: 0 0 18px 18px;
+  }
+  .MenuItems.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* TopNav pattern */
+  .topnav {
+    position: fixed;
+    left: 0;
+    top: 70px;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background: #181818;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s, opacity 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1100;
+  }
+  .topnav.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .topnav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 2em 0 0 0;
+    gap: 2em;
+    width: 100%;
+  }
+  .topnav ul li {
+    width: 100%;
+  }
+  .topnav ul li a,
+  .topnav ul li .cta-main {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding: 15px 0;
+    font-size: 1.08em;
+    border-radius: 0.5em;
+  }
+
+  /* .NavbarItems, .topbar - makes sticky header more compact */
+  .NavbarItems,
+  .topbar {
+    flex-direction: row;
+    padding: 1em 1.2em;
+  }
+  .logo-area {
+    gap: 0.5em;
+  }
+  .logo {
+    max-width: 110px;
+    height: 38px;
+  }
 }
 
-.cta-main:hover,
-.cta-main:focus {
-  background: #fff;
-  color: var(--purple);
-  box-shadow: 0 4px 18px #7357f659;
+/* Further reduce header on small devices */
+@media (max-width: 500px) {
+  .NavbarItems,
+  .topbar {
+    padding: 1em 0.45em;
+  }
+  .brand {
+    font-size: 1.28em;
+  }
+  .logo {
+    max-width: 90px;
+    height: 32px;
+  }
 }
 
-/* ============== FOOTER ============== */
+
+/* === FOOTER BASE STYLES === */
 
 .footer-new {
   background: #181818;
@@ -187,7 +302,7 @@ a {
   border-radius: 25px 25px 0 0;
   border-top: 1px solid #474545;
   margin-top: 4em;
-  font-family: var(--font-sub);
+  font-family: var(--font-sub, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
 }
 
 .footer-container {
@@ -201,142 +316,117 @@ a {
   flex-wrap: wrap;
 }
 
+.footer-section {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
 .footer-brand-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 1em;
 }
 
 .footer-logo {
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 2px 8px #0003;
-  transition: transform var(--transition), box-shadow var(--transition);
+  height: 42px;
+  max-width: 130px;
   object-fit: contain;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
-  max-width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .footer-logo:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px #0005;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.footer-brandname {
-  font-size: 2.2em;
-  font-weight: bold;
-  color: #fff;
-  letter-spacing: 0.07em;
-  font-family: inherit;
-  transition: color var(--transition);
-  white-space: nowrap;
-}
-
-.footer-brandname:hover {
-  color: #7d65f8;
-}
-
-.footer-columns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3.5em;
-}
-
-.footer-col {
-  min-width: 210px;
-  opacity: 0.95;
-  transition: opacity var(--transition);
-}
-
-.footer-col:hover {
-  opacity: 1;
-}
-
-.footer-col h4 {
-  color: var(--purple);
-  font-weight: 600;
-  margin-bottom: 1.1em;
-  font-size: 1.12em;
-  letter-spacing: 0.02em;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-col ul li {
-  margin-bottom: 0.55em;
-  transition: transform var(--transition);
-}
-
-.footer-col ul li:hover {
-  transform: translateX(3px);
-}
-
-.footer-col ul a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.06em;
-  transition: color var(--transition), text-decoration var(--transition);
-}
-
-.footer-col ul a:hover {
-  color: var(--red);
-  text-decoration: underline;
-}
-
-.join-news {
-  min-width: 235px;
+.footer-tagline {
+  font-size: 1em;
+  line-height: 1.4;
+  color: #ccc;
 }
 
 .footer-social {
   display: flex;
   gap: 1.2em;
-  margin-top: 1.5em;
+  margin-top: 0.5em;
 }
 
-.newsletter-form input[type="email"] {
-  padding: 0.7em 1.2em;
-  border: 2px solid transparent;
-  border-radius: 25px 0 0 25px;
-  outline: none;
-  min-width: 140px;
-  max-width: 180px;
-  font-size: 1em;
-  background: #333;
-  color: var(--gray-light);
-  transition: box-shadow var(--transition), border var(--transition);
-}
-
-.newsletter-form input[type="email"]:focus {
-  box-shadow: 0 2px 18px #7357f629;
-  border: 2px solid var(--purple);
-}
-
-.newsletter-form button {
-  background: #0e54be;
+.footer-social a {
   color: #fff;
-  padding: 0.7em 1.6em;
-  border: 2px solid transparent;
-  border-radius: 25px 25px 0 0;
-  font-weight: 700;
-  font-size: 1.05em;
-  cursor: pointer;
-  margin-left: -4px;
-  transition: background var(--transition), color var(--transition),
-    transform var(--transition);
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.newsletter-form button:hover,
-.newsletter-form button:focus {
-  background: #fff;
-  color: var(--red);
-  border: 2px solid var(--red);
+.footer-social a:hover,
+.footer-social a:focus {
+  color: var(--purple, #7357f6);
+  outline: none;
+}
+
+/* Headings in footer */
+.footer-section h3 {
+  font-weight: 600;
+  margin-bottom: 1em;
+  color: var(--purple, #7357f6);
+  font-size: 1.2em;
+}
+
+/* Lists */
+.footer-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.55em;
+  transition: transform 0.3s ease;
+}
+
+.footer-section ul li:hover {
   transform: translateX(3px);
 }
 
+.footer-section ul a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.06em;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.footer-section ul a:hover,
+.footer-section ul a:focus {
+  color: var(--red, #ff2c2c);
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Contact Info styles */
+footer address {
+  font-style: normal;
+  color: #ddd;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+footer address a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer address a:hover,
+footer address a:focus {
+  text-decoration: underline;
+  outline: none;
+}
+
+
+/* Footer meta (copyright and policies) */
 .footer-meta {
   max-width: 1200px;
   margin: 2em auto 0 auto;
@@ -356,77 +446,69 @@ a {
   text-decoration: underline;
   margin: 0 0.7em;
   opacity: 0.93;
-  transition: color var(--transition), opacity var(--transition);
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
-.footer-meta a:hover {
-  color: var(--red);
+.footer-meta a:hover,
+.footer-meta a:focus {
+  color: var(--red, #ff2c2c);
   opacity: 1;
+  outline: none;
 }
 
+/* Footer meta left and right parts */
 
-/* ========== RESPONSIVE =========== */
+.footer-meta-left,
+.footer-meta-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+}
 
-/* Small devices (mobile, up to 480px) */
+/* ==== RESPONSIVE FOOTER ==== */
+
+/* Small devices (mobile phones, max-width: 480px) */
 @media (max-width: 480px) {
   html {
     font-size: 14px;
   }
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1em;
-    padding: 1em;
-  }
-  .logo-area {
-    gap: 0.4em;
-  }
-  .brand {
-    font-size: 1.5em;
-  }
-  .topnav ul {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.8em;
-  }
-  .topnav ul li a,
-  .topnav ul li a.cta-main {
-    display: block;
-    padding: 10px 15px;
-    width: 100%;
-    text-align: center;
-  }
-  .topnav ul li a.cta-main,
-  .topnav ul li .cta-main {
-    padding: 10px 0;
-  }
-  /* Footer */
   .footer-container {
     flex-direction: column;
-    gap: 1.5em;
+    gap: 1.3em;
     padding: 0 1rem;
   }
   .footer-brand-group {
     justify-content: center;
     width: 100%;
+    align-items: center;
+    text-align: center;
   }
-  .footer-brandname {
-    font-size: 1.8em;
+  .footer-tagline {
+    font-size: 0.95em;
+  }
+  .footer-logo {
+    margin: 0 auto 0.6em auto;
   }
   .footer-columns {
     flex-direction: column;
-    gap: 2em;
+    gap: 1.2em;
   }
-  .footer-col {
+  .footer-section {
     min-width: 100%;
   }
-  .join-news {
-    min-width: 100%;
-  }
+  
   .footer-meta {
     flex-direction: column;
     text-align: center;
     font-size: 0.85em;
+    justify-content: center;
+  }
+  .footer-meta-left,
+  .footer-meta-right {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5em;
   }
 }
 
@@ -435,63 +517,47 @@ a {
   html {
     font-size: 15px;
   }
-  .topbar {
-    padding: 1em 1.5em;
-  }
-  .brand {
-    font-size: 1.75em;
-  }
-  .topnav ul {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-  .topnav ul li a,
-  .topnav ul li a.cta-main {
-    padding: 8px 15px;
-  }
-  /* Footer */
   .footer-container {
-    padding: 0 2vw;
     gap: 2em;
+    padding: 0 2vw;
   }
   .footer-columns {
-    gap: 3em;
+    gap: 2em;
     flex-wrap: wrap;
   }
-  .footer-col {
+  .footer-section {
     min-width: 45%;
   }
-  .join-news {
-    min-width: 45%;
-  }
+  
   .footer-meta {
     font-size: 0.9em;
   }
 }
 
-/* Large devices (desktops, 769px and above) */
-/* Already styled well for desktop but let's ensure */
+/* Large devices (desktops, 769px and up) */
 @media (min-width: 769px) {
   html {
     font-size: 16px;
   }
-  .topbar {
-    padding: 1em 2em;
-  }
-  .brand {
-    font-size: 2em;
-  }
-  .topnav ul {
-    flex-wrap: nowrap;
-  }
-  .footer-columns {
+  .footer-container {
     flex-wrap: nowrap;
     gap: 3.5em;
   }
-  .footer-col {
+  .footer-section {
     min-width: 210px;
   }
-  .join-news {
-    min-width: 235px;
-  }
+  
+}
+
+/* Visually hidden class for accessibility: */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
